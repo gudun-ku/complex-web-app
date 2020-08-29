@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm build
+RUN npm run build
 
 # Working stage
 FROM nginx
