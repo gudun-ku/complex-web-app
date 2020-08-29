@@ -15,7 +15,7 @@ after_success:
   - docker build -t gudunku/complex-app-server ./server
   - docker build -t gudunku/complex-app-worker ./worker
   # Login to docker CLI
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
   # Take those images and push them to docker hub
   - docker push gudunku/complex-app-client
   - docker push gudunku/complex-app-nginx
