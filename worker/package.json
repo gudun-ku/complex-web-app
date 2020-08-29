@@ -1,0 +1,13 @@
+{
+  "name": "worker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "redis": "3.0.2",
+    "nodemon": "2.0.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -L"
+  }
+}
