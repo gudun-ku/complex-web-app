@@ -21,3 +21,17 @@ after_success:
   - docker push gudunku/complex-app-nginx
   - docker push gudunku/complex-app-server
   - docker push gudunku/complex-app-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: complex-docker-app
+  env: ComplexDockerApp-env
+  bucket_name: "elasticbeanstalk-us-east-2-680841658568"
+  bucket_path: "complex-docker-app"
+  on:
+    branch: master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
