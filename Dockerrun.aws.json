@@ -1,11 +1,42 @@
 {
   "AWSEBDockerrunVersion": 2,
-  "containerDefinitions": [{
+  "containerDefinitions": [
+    {
       "name": "client",
       "image": "gudunku/complex-app-client",
       "hostname": "client",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "environment": [
+        {
+          "name": "REDIS_HOST",
+          "value": "complex-app-redis.nixu8n.0001.use2.cache.amazonaws.com"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        },
+        {
+          "name": "PGUSER",
+          "value": "postgres"
+        },
+        {
+          "name": "PGHOST",
+          "value": "complex-app-db.c0ghg2zrpvrh.us-east-2.rds.amazonaws.com"
+        },
+        {
+          "name": "PGDATABASE",
+          "value": "postgres"
+        },
+        {
+          "name": "PGPASSWORD",
+          "value": "postgres"
+        },
+        {
+          "name": "PGPORT",
+          "value": "5432"
+        }
+      ]
     },
     {
       "name": "server",
@@ -19,19 +50,31 @@
       "image": "gudunku/complex-app-worker",
       "hostname": "worker",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "environment": [
+        {
+          "name": "REDIS_HOST",
+          "value": "complex-app-redis.nixu8n.0001.use2.cache.amazonaws.com"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        }
+      ]
     },
     {
       "name": "nginx",
       "image": "gudunku/complex-app-nginx",
       "hostname": "nginx",
       "essential": true,
-      "memory": 128,
-      "portMappings": [{
-        "hostPort": 80,
-        "containerPort": 80
-      }],
-      "links": ["client", "server"]
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"],
+      "memory": 128
     }
   ]
 }
